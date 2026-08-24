@@ -11,7 +11,7 @@
 - Human authority: `Matías Maximiliano Bernal / Max Devs Solutions`
 - Default branch: `main`
 - Last updated: `2026-08-24`
-- Last actor: `ChatGPT`
+- Last actor: `Codex`
 
 ## Current state
 
@@ -21,8 +21,17 @@
   `normalize_status(value: str) -> str`.
 - [VERIFIED] `test_normalize_status.py` contains seven executable acceptance
   tests and is locked against agent modification.
-- [VERIFIED] `normalize_status.py` remains intentionally unimplemented at this
-  stage; ChatGPT did not implement it or claim the acceptance suite passes.
+- [VERIFIED] Before the Codex stage, `main` was clean at
+  `4d35d087eb8dd32e33b81754ff497e5adc8957ff` with origin
+  `https://github.com/Mad-Max8063/pmp-public-replay-01.git`.
+- [VERIFIED] `normalize_status.py` implements the active decisions using only
+  the Python standard library.
+- [VERIFIED] `python -m unittest -v test_normalize_status.py` ran all seven
+  acceptance tests successfully and reported `OK` on `2026-08-24`.
+- [VERIFIED] `python scripts/validate_memory.py PROJECT_MEMORY.md` reported
+  `VALID: PROJECT_MEMORY.md` on `2026-08-24`.
+- [VERIFIED] `python verify_replay.py` reported
+  `REPLAY STAGE VERIFIED: codex-implementation` on `2026-08-24`.
 - [VERIFIED] The human requirements have been translated into canonical active
   decisions below and recorded in `evidence/01-chatgpt-decision.md`.
 - [DOCUMENTED] PMP Core `0.2.1` was adopted from public commit
@@ -66,15 +75,15 @@
 
 ## Priorities
 
-1. Hand the canonical decisions to a fresh Codex session without relying on
-   hidden or conversational context.
-2. Have Codex implement only `normalize_status.py` and record actual execution
-   evidence for the acceptance suite and replay verifier.
-3. Preserve exact commit and CI evidence for independent ChatGPT verification.
+1. Preserve the Codex implementation, acceptance-test evidence, and replay
+   verifier evidence in one focused atomic commit.
+2. Have a Fresh ChatGPT verifier reconstruct the handoff independently from
+   Git history and exact GitHub Actions evidence.
+3. Preserve the phase boundaries and locked human-authored files.
 
 ## Next action
 
-`Codex: using only this repository and the active decisions in PROJECT_MEMORY.md, implement only normalize_status.py; do not modify test_normalize_status.py, TASK.md, existing evidence, verify_replay.py, the workflow, AGENTS.md, or PMP_SOURCE.md; run python -m unittest -v test_normalize_status.py and python verify_replay.py; update PROJECT_MEMORY.md with only verified results; create exactly one .project-memory/sessions/YYYY-MM-DD-codex-normalize-status.md record; set Last actor to Codex; leave one exact next action for a Fresh ChatGPT verifier; commit exactly normalize_status.py, PROJECT_MEMORY.md, and that one session file atomically and push main.`
+`Fresh ChatGPT verifier: using only this repository, reconstruct the Codex implementation handoff from Git history and the GitHub Actions run for the exact Codex commit SHA; verify the locked-file hashes, the seven-test acceptance result, the codex-implementation replay stage, the three-file Codex diff, and CI for that SHA; modify only PROJECT_MEMORY.md and a new evidence/03-chatgpt-verification.md; set Last actor to ChatGPT; leave Human authority as the sole next action; commit those two paths atomically and push main.`
 
 ## Evidence
 
@@ -83,8 +92,12 @@
 - `test_normalize_status.py`
 - `PMP_SOURCE.md`
 - `evidence/01-chatgpt-decision.md`
-- decision-stage CI for the ChatGPT commit must validate stage
-  `chatgpt-decision`; acceptance completion is not asserted at this stage
+- `python -m unittest -v test_normalize_status.py` on `2026-08-24`:
+  `Ran 7 tests in 0.003s`, `OK`
+- `python scripts/validate_memory.py PROJECT_MEMORY.md` on `2026-08-24`:
+  `VALID: PROJECT_MEMORY.md`
+- `python verify_replay.py` on `2026-08-24`:
+  `REPLAY STAGE VERIFIED: codex-implementation`
 
 ## Update rules
 
