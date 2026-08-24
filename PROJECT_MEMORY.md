@@ -11,7 +11,7 @@
 - Human authority: `Matías Maximiliano Bernal / Max Devs Solutions`
 - Default branch: `main`
 - Last updated: `2026-08-24`
-- Last actor: `Codex`
+- Last actor: `ChatGPT`
 
 ## Current state
 
@@ -32,6 +32,23 @@
   `VALID: PROJECT_MEMORY.md` on `2026-08-24`.
 - [VERIFIED] `python verify_replay.py` reported
   `REPLAY STAGE VERIFIED: codex-implementation` on `2026-08-24`.
+- [VERIFIED] Git history reconstructs the three atomic stages in order:
+  baseline `69573d2350327400d4c894ffd253beb10644174a`, ChatGPT decision
+  `4d35d087eb8dd32e33b81754ff497e5adc8957ff`, and Codex implementation
+  `7cf171277fd33f7e7d24207b356cbb3210132f5c`.
+- [VERIFIED] The ChatGPT decision commit changed only `PROJECT_MEMORY.md`
+  and `evidence/01-chatgpt-decision.md`; the Codex commit has that ChatGPT
+  commit as its exact parent and changed only `normalize_status.py`,
+  `PROJECT_MEMORY.md`, and the single Codex session record.
+- [VERIFIED] `TASK.md` and `test_normalize_status.py` retain their baseline
+  Git blob hashes through both agent commits, and `normalize_status.py`
+  implements the human-authorized decisions using only the standard library.
+- [VERIFIED] GitHub Actions run `32790159996` is a successful push run for
+  exact SHA `7cf171277fd33f7e7d24207b356cbb3210132f5c` and reported
+  `REPLAY STAGE VERIFIED: codex-implementation`,
+  `seven-test suite passing: True`, and `Codex session count: 1`.
+- [VERIFIED] Fresh ChatGPT final verification is recorded in
+  `evidence/03-chatgpt-verification.md`.
 - [VERIFIED] The human requirements have been translated into canonical active
   decisions below and recorded in `evidence/01-chatgpt-decision.md`.
 - [DOCUMENTED] PMP Core `0.2.1` was adopted from public commit
@@ -75,15 +92,13 @@
 
 ## Priorities
 
-1. Preserve the Codex implementation, acceptance-test evidence, and replay
-   verifier evidence in one focused atomic commit.
-2. Have a Fresh ChatGPT verifier reconstruct the handoff independently from
-   Git history and exact GitHub Actions evidence.
-3. Preserve the phase boundaries and locked human-authored files.
+1. Preserve the verified three-stage replay, phase boundaries, locked
+   human-authored files, and exact CI evidence.
+2. Await the Human authority's review and disposition.
 
 ## Next action
 
-`Fresh ChatGPT verifier: using only this repository, reconstruct the Codex implementation handoff from Git history and the GitHub Actions run for the exact Codex commit SHA; verify the locked-file hashes, the seven-test acceptance result, the codex-implementation replay stage, the three-file Codex diff, and CI for that SHA; modify only PROJECT_MEMORY.md and a new evidence/03-chatgpt-verification.md; set Last actor to ChatGPT; leave Human authority as the sole next action; commit those two paths atomically and push main.`
+`Human authority: review the verified three-stage public replay and decide any further action.`
 
 ## Evidence
 
@@ -98,6 +113,13 @@
   `VALID: PROJECT_MEMORY.md`
 - `python verify_replay.py` on `2026-08-24`:
   `REPLAY STAGE VERIFIED: codex-implementation`
+- Git history and locked-file blob comparison across baseline, ChatGPT, and
+  Codex commits
+- GitHub Actions run `32790159996` for exact Codex SHA
+  `7cf171277fd33f7e7d24207b356cbb3210132f5c`: `success`,
+  `REPLAY STAGE VERIFIED: codex-implementation`,
+  `seven-test suite passing: True`
+- `evidence/03-chatgpt-verification.md`
 
 ## Update rules
 
